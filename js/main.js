@@ -8,7 +8,7 @@ const getLineLength = function (line) {
   return false;
 };
 
-//getLineLength();
+getLineLength;
 
 const randomNumber = function (min, max) {
 
@@ -23,7 +23,7 @@ const randomNumber = function (min, max) {
 
 };
 
-//randomNumber();
+randomNumber;
 
 const PHOTO_DESCRIPTION = [
   'Море',
@@ -56,23 +56,21 @@ const COMMENTS_NAME = [
   'Алиса',
 ];
 
-const createPost = () => {
-  return {
-    id: randomNumber(1, 25),
-    url: 'photos/' + randomNumber(1, 25) + '.jpg',
-    description: PHOTO_DESCRIPTION[randomNumber(0, PHOTO_DESCRIPTION.length - 1)],
-    likes: randomNumber(15, 200),
-    comments: [
-      {
-        id: randomNumber(1, 25),
-        avatar: 'img/avatar-' + randomNumber(1, 6) + '.svg',
-        message: COMMENTS_MESSAGE[randomNumber(0, COMMENTS_MESSAGE.length - 1)],
-        name: COMMENTS_NAME[randomNumber(0, COMMENTS_MESSAGE.length - 1)],
-      },
-    ],
-  };
-};
+const createPost = (index) => ({
+  id: index,
+  url: `photos/${randomNumber(1, 25)}.jpg`,
+  description: PHOTO_DESCRIPTION[randomNumber(0, PHOTO_DESCRIPTION.length - 1)],
+  likes: randomNumber(15, 200),
+  comments: [
+    {
+      id: randomNumber(1, 25),
+      avatar: `img/avatar-${  randomNumber(1, 6)  }.svg`,
+      message: COMMENTS_MESSAGE[randomNumber(0, COMMENTS_MESSAGE.length - 1)],
+      name: COMMENTS_NAME[randomNumber(0, COMMENTS_MESSAGE.length - 1)],
+    },
+  ],
+});
 
-const POSTS = new Array(25).fill(null).map(() => createPost());
+const POSTS = new Array(25).fill(null).map((post, index) => createPost(index));
 
-console.log(POSTS);
+POSTS;
