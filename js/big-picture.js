@@ -1,4 +1,5 @@
 import {similarPosts} from './pictures.js';
+import {isEscEvent} from './util.js';
 
 const bigPictureList = document.querySelector('.big-picture');
 const bigPictireImg = bigPictureList.querySelector('.big-picture__img').querySelector('img');
@@ -58,7 +59,7 @@ btnCloseBigPicture.addEventListener('click', () => {
 });
 
 document.addEventListener('keydown', (evt) => {
-  if (evt.keyCode === 27) {
+  if (isEscEvent(evt)) {
     bigPictureList.classList.add('hidden');
   }
 });
