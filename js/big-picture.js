@@ -12,6 +12,28 @@ const pictures = document.querySelectorAll('.picture');
 
 const btnCloseBigPicture = bigPictureList.querySelector('.big-picture__cancel');
 
+
+const closebigPictureList = function () {
+  bigPictureList.classList.add('hidden');
+  document.body.classList.remove('modal-open');
+};
+
+const onEscKeydown = (evt) => {
+  if (isEscEvent(evt)) {
+    closebigPictureList();
+
+    document.removeEventListener('keydown', onEscKeydown);
+  }
+};
+
+// обработчкик закрытия большого изображения по нажатию на крестик
+btnCloseBigPicture.addEventListener('click', () => {
+  closebigPictureList();
+
+  document.removeEventListener('keydown', onEscKeydown);
+});
+
+//обработчкик откытия большого изображения
 const createBigPicture = function(i) {
   pictures[i].addEventListener('click', () => {
     //отображает большое изображение, кол-во лайков и комметариев
@@ -41,27 +63,12 @@ const createBigPicture = function(i) {
     //добавляет описание фото
     bigPictureDescription.textContent = similarPosts[i].description;
 
-    // временно убрал счетчик комментариев и загрузку новых комментариев
-    const bigPicturesCountAllComments = bigPictureList.querySelector('.social__comment-count');
-    bigPicturesCountAllComments.classList.add('hidden');
-    const bigPicturesCommentsLoader = bigPictureList.querySelector('.comments-loader');
-    bigPicturesCommentsLoader.classList.add('hidden');
-
     document.body.classList.add('modal-open');
+
+    document.addEventListener('keydown', onEscKeydown);
   });
 };
 
 for (let i = 0; i < pictures.length; i++) {
   createBigPicture(i);
 }
-
-btnCloseBigPicture.addEventListener('click', () => {
-  bigPictureList.classList.add('hidden');
-  document.body.classList.remove('modal-open');
-});
-
-document.addEventListener('keydown', (evt) => {
-  if (isEscEvent(evt)) {
-    bigPictureList.classList.add('hidden');
-  }
-});
