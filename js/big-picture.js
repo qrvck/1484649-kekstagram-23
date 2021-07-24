@@ -19,22 +19,24 @@ const createBigPicture = function(i) {
     bigPictireImg.src = similarPosts[i].url;
     bigPictureLikes.textContent = similarPosts[i].likes;
     bigPicturesCountComments.textContent = similarPosts[i].comments.length;
-
-    //добавляет комментарий
-    const bigPictureComment = document.createElement('li');
-    bigPictureComment.classList.add('social__comment');
-    const bigPictureCommentAvatar = document.createElement('img');
-    bigPictureCommentAvatar.classList.add('social__picture');
-    bigPictureCommentAvatar.src = similarPosts[i].comments[0].avatar;
-    bigPictureCommentAvatar.width = 35;
-    bigPictureCommentAvatar.height = 35;
-    bigPictureComment.appendChild(bigPictureCommentAvatar);
-    const bigPictureCommentText = document.createElement('p');
-    bigPictureCommentText.classList.add('social__text');
-    bigPictureCommentText.textContent = similarPosts[i].comments[0].message;
-    bigPictureComment.appendChild(bigPictureCommentText);
     bigPicturesCommentsList.textContent = '';
-    bigPicturesCommentsList.appendChild(bigPictureComment);
+
+    // добавляет комментарии
+    similarPosts[i].comments.forEach(({avatar, message}) => {
+      const bigPictureComment = document.createElement('li');
+      bigPictureComment.classList.add('social__comment');
+      const bigPictureCommentAvatar = document.createElement('img');
+      bigPictureCommentAvatar.classList.add('social__picture');
+      bigPictureCommentAvatar.src = avatar;
+      bigPictureCommentAvatar.width = 35;
+      bigPictureCommentAvatar.height = 35;
+      bigPictureComment.appendChild(bigPictureCommentAvatar);
+      const bigPictureCommentText = document.createElement('p');
+      bigPictureCommentText.classList.add('social__text');
+      bigPictureCommentText.textContent = message;
+      bigPictureComment.appendChild(bigPictureCommentText);
+      bigPicturesCommentsList.appendChild(bigPictureComment);
+    });
 
     //добавляет описание фото
     bigPictureDescription.textContent = similarPosts[i].description;

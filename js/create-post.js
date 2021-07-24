@@ -31,7 +31,7 @@ const COMMENTS_NAME = [
   'Алиса',
 ];
 
-const createComments = () => ({
+const createComment = () => ({
   id: randomNumber(1, 25),
   avatar: `img/avatar-${randomNumber(1, 6)}.svg`,
   message: COMMENTS_MESSAGE[randomNumber(0, COMMENTS_MESSAGE.length - 1)],
@@ -43,7 +43,7 @@ const createPost = (index) => ({
   url: `photos/${randomNumber(1, 25)}.jpg`,
   description: PHOTO_DESCRIPTION[randomNumber(0, PHOTO_DESCRIPTION.length - 1)],
   likes: randomNumber(15, 200),
-  comments: new Array(randomNumber(1, 35)).fill(null).map(() => createComments()),
+  comments: new Array(randomNumber(1, 35)).fill(null).map(() => createComment()),
 });
 
 const POSTS = () => new Array(25).fill(null).map((post, index) => createPost(index));
