@@ -34,7 +34,7 @@ btnCloseBigPicture.addEventListener('click', () => {
 const createBigPicture = function(i) {
   pictures[i].addEventListener('click', () => {
     //отображает большое изображение, кол-во лайков и комметариев
-    bigPicturesCommentsList.textContent = '';
+    bigPicturesCommentsList.innerHTML = '';
     bigPictureList.classList.remove('hidden');
     bigPictireImg.src = similarPosts[i].url;
     bigPictureLikes.textContent = similarPosts[i].likes;
@@ -55,8 +55,8 @@ const createBigPicture = function(i) {
 
     function getFiveComments () {
       // displayComments = [];
-      displayComments.push(...animals.slice(fromComment, toComment));
-      displayComments.forEach((one) => {
+      // displayComments.push(...animals.slice(fromComment, toComment));
+      animals.slice(fromComment, toComment).forEach((one) => {
         const bigPictureComment = document.createElement('li');
         bigPictureComment.textContent = one;
 
@@ -83,7 +83,7 @@ const createBigPicture = function(i) {
     getFiveComments();
 
     downloadMoreButton.addEventListener('click', () => {
-      bigPicturesCommentsList.innerHTML = '';
+      // bigPicturesCommentsList.innerHTML = '';
       getFiveComments();
     });
 
