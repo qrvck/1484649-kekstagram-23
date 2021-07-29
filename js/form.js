@@ -5,36 +5,38 @@ const uploadFileBtn = document.querySelector('#upload-file');
 const imageEditing = document.querySelector('.img-upload__overlay');
 const closeImageEditingBtn = document.querySelector('#upload-cancel');
 
+const uploadForm = document.querySelector('#upload-select-image');
+
 
 const openImageEditing = function () {
   imageEditing.classList.remove('hidden');
   document.body.classList.add('modal-open');
+  document.addEventListener('keydown', onEscKeydown);
 };
 
 const closeImageEditing = function () {
   imageEditing.classList.add('hidden');
   document.body.classList.remove('modal-open');
+
+  // uploadFileBtn.value = '';
+  uploadForm.reset();
+  document.removeEventListener('keydown', onEscKeydown);
 };
 
-const onEscKeydown = (evt) => {
+function onEscKeydown (evt) {
   if(isEscEvent(evt)) {
     closeImageEditing();
 
-    uploadFileBtn.innerHTML = '';
+    uploadForm.reset();
     document.removeEventListener('keydown', onEscKeydown);
 
   }
-};
+}
 
 uploadFileBtn.addEventListener('change', () => {
   openImageEditing();
-
-  document.addEventListener('keydown', onEscKeydown);
 });
 
 closeImageEditingBtn.addEventListener('click', () => {
   closeImageEditing();
-
-  uploadFileBtn.innerHTML = '';
-  document.removeEventListener('keydown', onEscKeydown);
 });
